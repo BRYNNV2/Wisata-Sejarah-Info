@@ -1,0 +1,26 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "0Ekavogj70RbBdgm4nQFt"
+uri = "file://artifacts/wisata-sejarah/assets/images/icon.png"
+type = "image"
+title = "historical tourism gis app icon"
+
+[[generated]]
+id = "4odlUQKB9yfmji9-lxC2e"
+uri = "file://artifacts/wisata-sejarah/assets/images/hero_borobudur.png"
+type = "image"
+title = "Borobudur temple hero image"
+
+[[generated]]
+id = "c2q1LMBc-dOtAz5J6nOIb"
+uri = "file://artifacts/wisata-sejarah/assets/images/hero_prambanan.png"
+type = "image"
+title = "Prambanan temple hero image"
+
+[[generated]]
+id = "Q-LTI7LxKZl-IPRSnz6bf"
+uri = "file://artifacts/wisata-sejarah/assets/images/pattern_bg.png"
+type = "image"
+title = "batik pattern background"

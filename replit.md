@@ -25,3 +25,29 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - `pnpm --filter @workspace/api-server run dev` — run API server locally
 
 See the `pnpm-workspace` skill for workspace structure, TypeScript setup, and package details.
+
+## Artifacts
+
+### Wisata Sejarah GIS (Mobile App)
+- **Path**: `artifacts/wisata-sejarah/`
+- **Type**: Expo (React Native)
+- **Purpose**: GIS-based Historical Tourism mobile app for Indonesia
+- **Features**:
+  - Interactive map with `react-native-maps` showing 6 historical sites
+  - Home screen with featured destinations and category filtering
+  - Search functionality across all sites
+  - Site detail pages with info, highlights, tips, AI recommendations
+  - Favorites (persisted via AsyncStorage)
+  - Explore tab for browsing all destinations
+  - Web fallback for map (stub + `.web.tsx` platform override)
+- **Color Scheme**: Earthy terracotta/gold tones (Indonesian batik-inspired)
+- **Data**: 6 pre-loaded Indonesian historical sites (Borobudur, Prambanan, Keraton, Fort Rotterdam, National Museum, Trowulan)
+
+### API Server
+- **Path**: `artifacts/api-server/`
+- **Type**: Express API
+- **Purpose**: Shared backend service
+
+### Metro Config Note
+- `metro.config.js` includes a custom resolver that stubs `react-native-maps` on web to prevent native-only import errors
+- Web map fallback is at `app/(tabs)/map.web.tsx`

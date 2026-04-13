@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "Wisata Sejarah GIS",
+    "slug": "wisata-sejarah",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "wisata-sejarah",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4a1c0a"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.wisatasejarah.gis"
+    },
+    "android": {
+      "package": "com.wisatasejarah.gis"
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://replit.com/"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}
