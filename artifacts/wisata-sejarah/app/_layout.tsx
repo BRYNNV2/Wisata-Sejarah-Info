@@ -6,7 +6,7 @@ import {
   useFonts,
 } from "@expo-google-fonts/inter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Stack } from "expo-router";
+import { router, Stack, useSegments } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -15,27 +15,16 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AppProvider } from "@/context/AppContext";
+import { AuthProvider, useAuth } from "@/context/AuthContext";
 
 SplashScreen.preventAutoHideAsync();
 
 const queryClient = new QueryClient();
 
-function RootLayoutNav() {
-  return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-      <Stack.Screen
-        name="site/[id]"
-        options={{
-          headerShown: false,
-          presentation: "card",
-        }}
-      />
-    </Stack>
-  );
-}
+function AuthGuardedLayout() {
+  const { user, isLoading } = useAuth();
+  const segments = useSegments();
 
-export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -49,19 +38,47 @@ export default function RootLayout() {
     }
   }, [fontsLoaded, fontError]);
 
+  useEffect(() => {
+    if (isLoading) return;
+    if (!fontsLoaded && !fontError) return;
+
+    const inAuth = segments[0] === "login";
+
+    if (!user && !inAuth) {
+      router.replace("/login");
+    } else if (user && inAuth) {
+      router.replace("/(tabs)");
+    }
+  }, [user, isLoading, fontsLoaded, fontError, segments]);
+
   if (!fontsLoaded && !fontError) return null;
 
+  return (
+    <AppProvider>
+      <GestureHandlerRootView>
+        <KeyboardProvider>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="login" options={{ headerShown: false, animation: "fade" }} />
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen
+              name="site/[id]"
+              options={{ headerShown: false, presentation: "card" }}
+            />
+          </Stack>
+        </KeyboardProvider>
+      </GestureHandlerRootView>
+    </AppProvider>
+  );
+}
+
+export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <ErrorBoundary>
         <QueryClientProvider client={queryClient}>
-          <AppProvider>
-            <GestureHandlerRootView>
-              <KeyboardProvider>
-                <RootLayoutNav />
-              </KeyboardProvider>
-            </GestureHandlerRootView>
-          </AppProvider>
+          <AuthProvider>
+            <AuthGuardedLayout />
+          </AuthProvider>
         </QueryClientProvider>
       </ErrorBoundary>
     </SafeAreaProvider>
