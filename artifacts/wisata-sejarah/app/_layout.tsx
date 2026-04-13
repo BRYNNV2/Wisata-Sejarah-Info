@@ -64,6 +64,14 @@ function AuthGuardedLayout() {
               name="site/[id]"
               options={{ headerShown: false, presentation: "card" }}
             />
+            <Stack.Screen
+              name="admin/sites"
+              options={{ headerShown: false, presentation: "card" }}
+            />
+            <Stack.Screen
+              name="admin/site-form"
+              options={{ headerShown: false, presentation: "card" }}
+            />
           </Stack>
         </KeyboardProvider>
       </GestureHandlerRootView>
