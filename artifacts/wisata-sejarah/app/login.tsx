@@ -8,7 +8,6 @@ import {
   ScrollView,
   ActivityIndicator,
   Platform,
-  Image,
 } from "react-native";
 import { router } from "expo-router";
 import { Feather } from "@expo/vector-icons";
@@ -16,6 +15,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import * as Haptics from "expo-haptics";
 import { useColors } from "@/hooks/useColors";
 import { useAuth } from "@/context/AuthContext";
+import { BatikHeader } from "@/components/BatikHeader";
 
 export default function LoginScreen() {
   const colors = useColors();
@@ -56,13 +56,21 @@ export default function LoginScreen() {
       keyboardShouldPersistTaps="handled"
     >
       {/* Hero */}
-      <View style={[styles.hero, { backgroundColor: colors.primary, paddingTop: topPadding + 16 }]}>
-        <View style={styles.logoBox}>
-          <Feather name="map-pin" size={32} color={colors.primary} />
+      <BatikHeader style={{ paddingTop: topPadding + 16, paddingBottom: 32 }}>
+        <View style={styles.heroInner}>
+          <View style={styles.logoBox}>
+            <Feather name="map-pin" size={32} color={colors.primary} />
+          </View>
+          <Text style={styles.heroTitle}>Wisata Sejarah</Text>
+          <Text style={styles.heroSubtitle}>Jelajahi warisan budaya Indonesia</Text>
+          {/* Ornament row */}
+          <View style={styles.ornamentRow}>
+            <View style={styles.ornamentLine} />
+            <Feather name="compass" size={14} color="rgba(255,220,100,0.7)" />
+            <View style={styles.ornamentLine} />
+          </View>
         </View>
-        <Text style={styles.heroTitle}>Wisata Sejarah</Text>
-        <Text style={styles.heroSubtitle}>Jelajahi warisan budaya Indonesia</Text>
-      </View>
+      </BatikHeader>
 
       {/* Form */}
       <View style={styles.formWrap}>
@@ -187,6 +195,22 @@ const styles = StyleSheet.create({
     paddingBottom: 36,
     alignItems: "center",
     gap: 8,
+  },
+  heroInner: {
+    alignItems: "center",
+    gap: 8,
+  },
+  ornamentRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginTop: 6,
+  },
+  ornamentLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "rgba(255,220,100,0.35)",
+    maxWidth: 60,
   },
   logoBox: {
     width: 64,

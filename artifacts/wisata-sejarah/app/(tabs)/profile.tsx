@@ -15,6 +15,7 @@ import { useColors } from "@/hooks/useColors";
 import { useAuth } from "@/context/AuthContext";
 import { useApp } from "@/context/AppContext";
 import { HISTORICAL_SITES } from "@/constants/sites";
+import { BatikHeader } from "@/components/BatikHeader";
 
 export default function ProfileScreen() {
   const colors = useColors();
@@ -55,7 +56,7 @@ export default function ProfileScreen() {
         contentContainerStyle={{ paddingBottom: bottomPadding + 20 }}
       >
         {/* Header */}
-        <View style={[styles.header, { backgroundColor: colors.primary, paddingTop: topPadding + 16 }]}>
+        <BatikHeader style={{ alignItems: "center", paddingTop: topPadding + 16, paddingHorizontal: 24, paddingBottom: 28, gap: 6 }}>
           <View style={styles.avatarWrap}>
             <View style={[styles.avatar, { backgroundColor: "rgba(255,255,255,0.2)" }]}>
               <Text style={styles.avatarText}>
@@ -69,13 +70,13 @@ export default function ProfileScreen() {
           <View
             style={[
               styles.roleBadge,
-              { backgroundColor: isAdmin ? "rgba(255,255,255,0.25)" : "rgba(196,134,10,0.3)" },
+              { backgroundColor: isAdmin ? "rgba(255,255,255,0.22)" : "rgba(196,134,10,0.3)" },
             ]}
           >
             <Feather name={isAdmin ? "shield" : "user"} size={11} color="#fff" />
             <Text style={styles.roleText}>{isAdmin ? "Administrator" : "Pengunjung"}</Text>
           </View>
-        </View>
+        </BatikHeader>
 
         {/* Stats */}
         <View style={styles.statsRow}>

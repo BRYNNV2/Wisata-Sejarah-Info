@@ -16,6 +16,7 @@ import * as Haptics from "expo-haptics";
 import { useColors } from "@/hooks/useColors";
 import { useApp } from "@/context/AppContext";
 import { HistoricalSite } from "@/constants/sites";
+import { BatikHeader } from "@/components/BatikHeader";
 
 const CATEGORY_COLORS: Record<string, string> = {
   temple: "#8B4513",
@@ -99,47 +100,43 @@ export default function AdminSitesScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
-      <View
-        style={[
-          styles.header,
-          { backgroundColor: colors.background, paddingTop: topPadding + 8, borderBottomColor: colors.border },
-        ]}
-      >
+      <BatikHeader style={{ paddingTop: topPadding + 10, paddingHorizontal: 16, paddingBottom: 14 }}>
         <View style={styles.headerRow}>
-          <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-            <Feather name="arrow-left" size={22} color={colors.foreground} />
+          <TouchableOpacity
+            onPress={() => router.back()}
+            style={[styles.backBtn, { backgroundColor: "rgba(255,255,255,0.18)" }]}
+          >
+            <Feather name="arrow-left" size={20} color="#fff" />
           </TouchableOpacity>
           <View style={styles.headerTitles}>
-            <Text style={[styles.headerTitle, { color: colors.foreground }]}>Kelola Destinasi</Text>
-            <Text style={[styles.headerSub, { color: colors.mutedForeground }]}>
-              {sites.length} destinasi terdaftar
-            </Text>
+            <Text style={styles.headerTitle}>Kelola Destinasi</Text>
+            <Text style={styles.headerSub}>{sites.length} destinasi terdaftar</Text>
           </View>
           <TouchableOpacity
-            style={[styles.resetBtn, { borderColor: colors.border }]}
+            style={[styles.resetBtn, { backgroundColor: "rgba(255,255,255,0.18)" }]}
             onPress={handleReset}
           >
-            <Feather name="rotate-ccw" size={16} color={colors.mutedForeground} />
+            <Feather name="rotate-ccw" size={16} color="rgba(255,255,255,0.85)" />
           </TouchableOpacity>
         </View>
 
-        {/* Search */}
-        <View style={[styles.searchBar, { backgroundColor: colors.card, borderColor: colors.border }]}>
-          <Feather name="search" size={16} color={colors.mutedForeground} />
+        {/* Search on batik */}
+        <View style={[styles.searchBar, { backgroundColor: "rgba(255,255,255,0.18)", borderColor: "rgba(255,255,255,0.25)" }]}>
+          <Feather name="search" size={16} color="rgba(255,255,255,0.7)" />
           <TextInput
             value={search}
             onChangeText={setSearch}
             placeholder="Cari destinasi..."
-            placeholderTextColor={colors.mutedForeground}
-            style={[styles.searchInput, { color: colors.foreground }]}
+            placeholderTextColor="rgba(255,255,255,0.6)"
+            style={[styles.searchInput, { color: "#fff" }]}
           />
           {search.length > 0 && (
             <TouchableOpacity onPress={() => setSearch("")}>
-              <Feather name="x" size={15} color={colors.mutedForeground} />
+              <Feather name="x" size={15} color="rgba(255,255,255,0.7)" />
             </TouchableOpacity>
           )}
         </View>
-      </View>
+      </BatikHeader>
 
       {/* List */}
       <FlatList
@@ -252,7 +249,6 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingBottom: 12,
-    borderBottomWidth: 1,
     gap: 10,
   },
   headerRow: {
@@ -260,14 +256,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
-  backBtn: { padding: 4 },
+  backBtn: { padding: 9, borderRadius: 10 },
   headerTitles: { flex: 1 },
-  headerTitle: { fontSize: 20, fontWeight: "800" },
-  headerSub: { fontSize: 12, marginTop: 1 },
+  headerTitle: { fontSize: 20, fontWeight: "800", color: "#fff" },
+  headerSub: { fontSize: 12, marginTop: 1, color: "rgba(255,255,255,0.75)" },
   resetBtn: {
-    borderWidth: 1,
     borderRadius: 10,
-    padding: 8,
+    padding: 9,
   },
   searchBar: {
     flexDirection: "row",

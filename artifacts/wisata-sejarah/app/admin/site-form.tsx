@@ -17,6 +17,7 @@ import * as Haptics from "expo-haptics";
 import { useColors } from "@/hooks/useColors";
 import { useApp } from "@/context/AppContext";
 import { HistoricalSite } from "@/constants/sites";
+import { BatikHeader } from "@/components/BatikHeader";
 
 const CATEGORIES: { value: HistoricalSite["category"]; label: string }[] = [
   { value: "temple", label: "Candi" },
@@ -237,25 +238,23 @@ export default function SiteFormScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background }]}>
       {/* Header */}
-      <View
-        style={[
-          styles.header,
-          { paddingTop: topPadding + 8, backgroundColor: colors.background, borderBottomColor: colors.border },
-        ]}
-      >
-        <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
-          <Feather name="arrow-left" size={22} color={colors.foreground} />
+      <BatikHeader style={[styles.header, { paddingTop: topPadding + 10 }]}>
+        <TouchableOpacity
+          onPress={() => router.back()}
+          style={[styles.backBtn, { backgroundColor: "rgba(255,255,255,0.18)" }]}
+        >
+          <Feather name="arrow-left" size={20} color="#fff" />
         </TouchableOpacity>
         <View style={styles.headerTitles}>
-          <Text style={[styles.headerTitle, { color: colors.foreground }]}>
+          <Text style={styles.headerTitle}>
             {isEdit ? "Edit Destinasi" : "Tambah Destinasi"}
           </Text>
-          <Text style={[styles.headerSub, { color: colors.mutedForeground }]}>
+          <Text style={styles.headerSub}>
             {isEdit ? "Perbarui informasi destinasi" : "Tambah destinasi wisata baru"}
           </Text>
         </View>
         <TouchableOpacity
-          style={[styles.saveBtn, { backgroundColor: saving ? colors.mutedForeground : colors.primary }]}
+          style={[styles.saveBtn, { backgroundColor: saving ? "rgba(255,255,255,0.3)" : "rgba(255,255,255,0.22)" }]}
           onPress={handleSave}
           disabled={saving}
         >
@@ -265,7 +264,7 @@ export default function SiteFormScreen() {
             <Text style={styles.saveBtnText}>Simpan</Text>
           )}
         </TouchableOpacity>
-      </View>
+      </BatikHeader>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -474,12 +473,11 @@ const styles = StyleSheet.create({
     gap: 12,
     paddingHorizontal: 16,
     paddingBottom: 14,
-    borderBottomWidth: 1,
   },
-  backBtn: { padding: 4 },
+  backBtn: { padding: 9, borderRadius: 10 },
   headerTitles: { flex: 1 },
-  headerTitle: { fontSize: 18, fontWeight: "800" },
-  headerSub: { fontSize: 12, marginTop: 1 },
+  headerTitle: { fontSize: 18, fontWeight: "800", color: "#fff" },
+  headerSub: { fontSize: 12, marginTop: 1, color: "rgba(255,255,255,0.75)" },
   saveBtn: {
     paddingHorizontal: 16,
     paddingVertical: 9,

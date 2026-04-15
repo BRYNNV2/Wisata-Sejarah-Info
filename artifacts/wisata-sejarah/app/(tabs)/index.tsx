@@ -17,6 +17,7 @@ import { useApp } from "@/context/AppContext";
 import { SearchBar } from "@/components/SearchBar";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { SiteCard } from "@/components/SiteCard";
+import { BatikHeader } from "@/components/BatikHeader";
 
 export default function HomeScreen() {
   const colors = useColors();
@@ -33,18 +34,25 @@ export default function HomeScreen() {
         stickyHeaderIndices={[0]}
       >
         {/* Sticky Header */}
-        <View style={[styles.header, { backgroundColor: colors.background, paddingTop: topPadding + 8 }]}>
-          <View style={styles.headerTop}>
-            <View>
-              <Text style={[styles.greeting, { color: colors.mutedForeground }]}>Selamat datang di</Text>
-              <Text style={[styles.title, { color: colors.foreground }]}>Wisata Sejarah</Text>
+        <View style={[styles.header, { backgroundColor: colors.background }]}>
+          {/* Batik greeting banner */}
+          <BatikHeader style={{ paddingTop: topPadding + 14, paddingBottom: 18, paddingHorizontal: 18 }}>
+            <View style={styles.headerTop}>
+              <View style={styles.greetingBlock}>
+                <Text style={styles.greeting}>Selamat datang di</Text>
+                <Text style={styles.title}>Wisata Sejarah</Text>
+                <View style={styles.taglineRow}>
+                  <View style={styles.taglineDot} />
+                  <Text style={styles.tagline}>Warisan Budaya Nusantara</Text>
+                  <View style={styles.taglineDot} />
+                </View>
+              </View>
+              <TouchableOpacity style={styles.notifBtn}>
+                <Feather name="bell" size={18} color="#fff" />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={[styles.notifBtn, { backgroundColor: colors.secondary, borderColor: colors.border }]}
-            >
-              <Feather name="bell" size={18} color={colors.primary} />
-            </TouchableOpacity>
-          </View>
+          </BatikHeader>
+          {/* Search + filter on light background */}
           <View style={styles.searchWrap}>
             <SearchBar value={searchQuery} onChangeText={setSearchQuery} />
           </View>
@@ -148,17 +156,35 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 12,
   },
-  greeting: { fontSize: 13, marginBottom: 2 },
-  title: { fontSize: 24, fontWeight: "800" },
+  greetingBlock: { flex: 1 },
+  greeting: { fontSize: 13, marginBottom: 2, color: "rgba(255,255,255,0.75)" },
+  title: { fontSize: 24, fontWeight: "800", color: "#fff" },
+  taglineRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: 4,
+  },
+  taglineDot: {
+    width: 18,
+    height: 1,
+    backgroundColor: "rgba(255,220,100,0.6)",
+  },
+  tagline: {
+    fontSize: 11,
+    color: "rgba(255,220,100,0.85)",
+    fontWeight: "500",
+    letterSpacing: 0.5,
+  },
   notifBtn: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    borderWidth: 1,
+    backgroundColor: "rgba(255,255,255,0.18)",
     alignItems: "center",
     justifyContent: "center",
   },
-  searchWrap: { paddingHorizontal: 16, marginBottom: 4 },
+  searchWrap: { paddingHorizontal: 16, marginBottom: 4, marginTop: 10 },
   section: { marginTop: 16 },
   sectionHeader: {
     flexDirection: "row",

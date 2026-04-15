@@ -15,6 +15,7 @@ import * as Haptics from "expo-haptics";
 import { useColors } from "@/hooks/useColors";
 import { useAuth } from "@/context/AuthContext";
 import { useApp } from "@/context/AppContext";
+import { BatikHeader } from "@/components/BatikHeader";
 
 interface StatCardProps {
   label: string;
@@ -141,9 +142,7 @@ export default function AdminScreen() {
         contentContainerStyle={{ paddingBottom: bottomPadding + 20 }}
       >
         {/* Header */}
-        <View
-          style={[styles.header, { backgroundColor: colors.primary, paddingTop: topPadding + 12 }]}
-        >
+        <BatikHeader style={{ paddingTop: topPadding + 12, paddingHorizontal: 20, paddingBottom: 20, gap: 10 }}>
           <View style={styles.headerRow}>
             <View>
               <Text style={styles.headerGreet}>Panel Administrator</Text>
@@ -153,11 +152,11 @@ export default function AdminScreen() {
               <Feather name="log-out" size={18} color="#fff" />
             </TouchableOpacity>
           </View>
-          <View style={[styles.roleBadge, { backgroundColor: "rgba(255,255,255,0.2)" }]}>
+          <View style={[styles.roleBadge, { backgroundColor: "rgba(255,255,255,0.18)" }]}>
             <Feather name="shield" size={12} color="#fff" />
             <Text style={styles.roleBadgeText}>Administrator · Akses Penuh</Text>
           </View>
-        </View>
+        </BatikHeader>
 
         {/* Stats */}
         <View style={styles.statsGrid}>
